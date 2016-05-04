@@ -1,3 +1,15 @@
 publication_homepage:
     path:     /
-    defaults: { _controller: PublicationBundle:Chercheur:index }
+    defaults: { _controller: PublicationBundle:Default:index }
+
+publication_chercheur:
+    path:     /chercheur
+    defaults: {_controller: PublicationBundle:Chercheur:index }
+
+publication_chercheur_view:
+    path:     /chercheur/view
+    defaults: {_controller: PublicationBundle:Chercheur:view }
+
+publication_chercheur_add:
+    path:     /chercheur/add
+    defaults: {_controller: PublicationBundle:Chercheur:add }

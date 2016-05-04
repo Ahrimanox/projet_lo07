@@ -70,6 +70,20 @@ class Article
      */
     private $editeur;
 
+    /**
+     *
+     * @ORM\ManyToMany(targetEntity="PublicationBundle\Entity\Chercheur", cascade={"persist"})
+     * @ORM\JoinTable(name="lo07_article_chercheur")
+     */
+    private $auteurs;
+
+
+    public function __construct()
+    {
+        $this->datePublication = new \DateTime();
+        $this->auteurs = new ArrayCollection();
+    }
+
 
     /**
      * Get id

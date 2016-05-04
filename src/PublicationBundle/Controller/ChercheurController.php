@@ -5,6 +5,10 @@ namespace PublicationBundle\Controller;
 use PublicationBundle\Entity\Chercheur;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 use Symfony\Component\HttpFoundation\Response;
 
@@ -12,11 +16,7 @@ class ChercheurController extends Controller
 {
     public function indexAction()
     {
-		$content = 
-			$this->get("templating")
-				->render("PublicationBundle:Chercheur:index.html.twig");
-
-        return new Response($content);
+        return $this->render("PublicationBundle:Chercheur:index.html.twig");
     }
 
     public function viewAction()
@@ -34,17 +34,21 @@ class ChercheurController extends Controller
     public function addAction()
     {
     	$ch = new Chercheur();
-    	$ch->setOrganisation("UTT");
-    	$ch->setEquipe("ERA");
-    	$ch->setPrenom("Marc");
-    	$ch->setNom("Lemercier");
+        $ch->setNom("Lemercier");
+        $ch->setPrenom("Marc");
+        $ch->setOrganisation("UTT");
+        $ch->setEquipe("ERA");
 
-    	$em = $this->getDoctrine()->getManager();
+        $form = $this->createFormBuilder($ch)
+            ->add('Nom', TextType::class)
+            ->add('Prenom', TextType::class)
+            ->add('Organisation', TextType::class)
+            ->add('Equipe', TextType::class)
+            ->add('Creer', SubmitType::class)
+            ->getForm();
 
-    	$em->persist($ch);
-
-    	$em->flush();
-
-    	return new Response($ch->getPrenom() . " travaille à " . $ch->getOrganisation() . " dans l'équipe de " . $ch->getEquipe());
+        return $this->render('PublicationBundle:Chercheur:new.html.twig', array(
+            'form' => $form->createView(),
+        ));
     }
 }		

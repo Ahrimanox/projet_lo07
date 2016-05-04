@@ -7,7 +7,7 @@
 		<h1>Voici les beaux chercheurs</h1>
 		<ul>
 			{% for chercheur in listChercheur %}
-				<li>{{ chercheur.id }} {{ chercheur.prenom }} {{ chercheur.nom | upper }} à {{ chercheur.organisation }} dans l'équipe {{ chercheur.equipe }}</li>
+				<li>{{ chercheur.id }} {{ chercheur.prenom }} {{ chercheur.nom | upper }} à {{ chercheur.organisation }} dans l'équipe {{ chercheur.equipe }} </li>
 			{% else %}
 				<li>Pas de chercheurs dans la base de données</li>
 			{% endfor %}

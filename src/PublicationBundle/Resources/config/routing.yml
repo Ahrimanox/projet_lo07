@@ -13,3 +13,7 @@ publication_chercheur_view:
 publication_chercheur_add:
     path:     /chercheur/add
     defaults: {_controller: PublicationBundle:Chercheur:add }
+
+publication_chercheur_add_check:
+    path:     /chercheur/add/check
+    defaults: {_controller: PublicationBundle:Chercheur:addCheck }

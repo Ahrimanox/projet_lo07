@@ -3,12 +3,10 @@
 namespace PublicationBundle\Controller;
 
 use PublicationBundle\Entity\Chercheur;
+use PublicationBundle\Form\Type\ChercheurType;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\Extension\Core\Type\DateType;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 use Symfony\Component\HttpFoundation\Response;
 
@@ -31,7 +29,7 @@ class ChercheurController extends Controller
     	return $this->render("PublicationBundle:Chercheur:view.html.twig", array("listChercheur" => $listChercheur));
     }
 
-    public function addAction()
+    public function addAction(Request $request)
     {
     	$ch = new Chercheur();
         $ch->setNom("Lemercier");
@@ -39,16 +37,26 @@ class ChercheurController extends Controller
         $ch->setOrganisation("UTT");
         $ch->setEquipe("ERA");
 
-        $form = $this->createFormBuilder($ch)
-            ->add('Nom', TextType::class)
-            ->add('Prenom', TextType::class)
-            ->add('Organisation', TextType::class)
-            ->add('Equipe', TextType::class)
-            ->add('Creer', SubmitType::class)
-            ->getForm();
+        $form = $this->createForm(ChercheurType::class, $ch);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid())
+        {
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($ch);
+            $em->flush();
+
+            return $this->redirectToRoute('publication_chercheur_view');
+        }
 
         return $this->render('PublicationBundle:Chercheur:new.html.twig', array(
-            'form' => $form->createView(),
+            'form' => $form->createView()
         ));
+    }
+
+    public function addCheckAction(Request $request)
+    {
+
     }
 }		

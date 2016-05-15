@@ -55,8 +55,8 @@ class ChercheurController extends Controller
         ));
     }
 
-    public function addCheckAction(Request $request)
+    public function testAction(Request $request)
     {
-
+        return $this->render('PublicationBundle:Chercheur:publications.html.twig');
     }
 }		

@@ -120,17 +120,9 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
                 return array (  '_controller' => 'PublicationBundle\\Controller\\ChercheurController::viewAction',  '_route' => 'publication_chercheur_view',);
             }
 
-            if (0 === strpos($pathinfo, '/chercheur/add')) {
-                // publication_chercheur_add
-                if ($pathinfo === '/chercheur/add') {
-                    return array (  '_controller' => 'PublicationBundle\\Controller\\ChercheurController::addAction',  '_route' => 'publication_chercheur_add',);
-                }
-
-                // publication_chercheur_add_check
-                if ($pathinfo === '/chercheur/add/check') {
-                    return array (  '_controller' => 'PublicationBundle\\Controller\\ChercheurController::addCheckAction',  '_route' => 'publication_chercheur_add_check',);
-                }
-
+            // publication_chercheur_add
+            if ($pathinfo === '/chercheur/add') {
+                return array (  '_controller' => 'PublicationBundle\\Controller\\ChercheurController::addAction',  '_route' => 'publication_chercheur_add',);
             }
 
             // publication_chercheur_test

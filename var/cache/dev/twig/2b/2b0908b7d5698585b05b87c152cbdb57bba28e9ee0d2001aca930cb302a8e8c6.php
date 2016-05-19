@@ -15,159 +15,17 @@ class __TwigTemplate_6336db5da701254f29c898bc6bebf67cdc000b85b2a58e16043f1527fa2
 
     protected function doDisplay(array $context, array $blocks = array())
     {
-        $__internal_c52ff4ac18bc9bc182f96fc6154a18846483b471d60824937632c28aee323fde = $this->env->getExtension("native_profiler");
-        $__internal_c52ff4ac18bc9bc182f96fc6154a18846483b471d60824937632c28aee323fde->enter($__internal_c52ff4ac18bc9bc182f96fc6154a18846483b471d60824937632c28aee323fde_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "PublicationBundle:Chercheur:publications.html.twig"));
+        $__internal_1bfe4ffc253db22c10b927f9c5cce87825fe2fc18f3cd90196e212acb5827494 = $this->env->getExtension("native_profiler");
+        $__internal_1bfe4ffc253db22c10b927f9c5cce87825fe2fc18f3cd90196e212acb5827494->enter($__internal_1bfe4ffc253db22c10b927f9c5cce87825fe2fc18f3cd90196e212acb5827494_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "PublicationBundle:Chercheur:publications.html.twig"));
 
         // line 1
         echo "<html>
   <head>
     <meta charset=\"utf-8\" />
-    <link rel=\"stylesheet\" type=\"text/css\" href=\"./main.css\" />
-    <style>
-        body {
-  height: 100%;
-  margin: 0; 
-  background-color: rgb(  219, 219, 219 );
-}
-
-header{
-  background-color:#73a0c5; /*rgb(  102, 153, 204  );*/
-  height: 100px;
-  line-height:100px;
-}
-
-table
-{
-    border-collapse: separate;
-  border-spacing: 25px;
-}
-
-button{
-background-color:  rgb( 240, 240, 240   );
-  width: 150px;
-  border: none;
-  margin-bottom:2px;
-  border-radius: 4px;
-}
-
-button:hover {
-    background-color: #4CAF50; /* Green */
-    color: white;
-}
-
-
-#container {
-  min-height: 100%;
-  position: relative;
-}
-
-#option {
-  float: right;
-  width: 150px;
-  border-radius: 10px;
-}
-
-#article {
- border-radius: 10px;
-  vertical-align:top;
-  margin-left:100px;
-  padding: 8px 8px ;
-  background-color: white;
-  width:950px;
-   height:120px;
-  overflow:hidden;
-  border-style: solid;
-   border-width: 1px;
-   border-color: rgb( 192, 192, 192);
-}
-
-.menu {
-
-  background-color: rgb( 0, 51, 102 );
-  padding: 2px 8px;
-}
-
-
-.menu label {
-  color: white;
-  vertical-align: middle;
-}
-
-.menu a {
-  text-decoration: none;
-  color: white;
-  cursor: pointer;
-  padding-top: 4px;
-}
-
-#content {
-  padding: 30px;
-}
-
-#help {
-  float: right;
-  padding-right: 12px;
-}
-
-.ui-widget {
-  font-size: 80%;
-}
-
-#content>div {
-  display: table-row;
-}
-
-#content label, .label {
-  display: table-cell;
-  text-align: right;
-  vertical-align: top;
-  width: 20%;
-  color: gray;
-  padding: 0 5px 5px 0;
-}
-
-.ui-icon {
-  display: inline-block;
-  cursor: pointer;
-}
-
-.ui-icon.info {
-  background-image: url(lib/images/ui-icons_2e83ff_256x240.png);
-}
-
-#content ul:not(.chzn-choices) {
-  padding: 0 20;
-}
-
-#console {
-  text-align: center;
-}
-
-#uploader {
-  display: none;
-}
-
-.ok {
-  color: green;
-}
-
-.ko {
-  color: red;
-}
-
-.ok:before {
-  content: \"\\2713\";
-}
-
-.ko:before {
-  content: \"\\26a0\";
-}
-
-.sorted {
-  font-weight: bold
-}
-
-    </style>
+    <link rel=\"stylesheet\" type=\"text/css\" href=\"";
+        // line 4
+        echo twig_escape_filter($this->env, $this->env->getExtension('asset')->getAssetUrl("main.css"), "html", null, true);
+        echo "\" />
     <title>Publications</title>
   </head>
   
@@ -287,7 +145,7 @@ button:hover {
   </body>
 </html>";
         
-        $__internal_c52ff4ac18bc9bc182f96fc6154a18846483b471d60824937632c28aee323fde->leave($__internal_c52ff4ac18bc9bc182f96fc6154a18846483b471d60824937632c28aee323fde_prof);
+        $__internal_1bfe4ffc253db22c10b927f9c5cce87825fe2fc18f3cd90196e212acb5827494->leave($__internal_1bfe4ffc253db22c10b927f9c5cce87825fe2fc18f3cd90196e212acb5827494_prof);
 
     }
 
@@ -296,160 +154,20 @@ button:hover {
         return "PublicationBundle:Chercheur:publications.html.twig";
     }
 
+    public function isTraitable()
+    {
+        return false;
+    }
+
     public function getDebugInfo()
     {
-        return array (  22 => 1,);
+        return array (  27 => 4,  22 => 1,);
     }
 }
 /* <html>*/
 /*   <head>*/
 /*     <meta charset="utf-8" />*/
-/*     <link rel="stylesheet" type="text/css" href="./main.css" />*/
-/*     <style>*/
-/*         body {*/
-/*   height: 100%;*/
-/*   margin: 0; */
-/*   background-color: rgb(  219, 219, 219 );*/
-/* }*/
-/* */
-/* header{*/
-/*   background-color:#73a0c5; /*rgb(  102, 153, 204  );*//* */
-/*   height: 100px;*/
-/*   line-height:100px;*/
-/* }*/
-/* */
-/* table*/
-/* {*/
-/*     border-collapse: separate;*/
-/*   border-spacing: 25px;*/
-/* }*/
-/* */
-/* button{*/
-/* background-color:  rgb( 240, 240, 240   );*/
-/*   width: 150px;*/
-/*   border: none;*/
-/*   margin-bottom:2px;*/
-/*   border-radius: 4px;*/
-/* }*/
-/* */
-/* button:hover {*/
-/*     background-color: #4CAF50; /* Green *//* */
-/*     color: white;*/
-/* }*/
-/* */
-/* */
-/* #container {*/
-/*   min-height: 100%;*/
-/*   position: relative;*/
-/* }*/
-/* */
-/* #option {*/
-/*   float: right;*/
-/*   width: 150px;*/
-/*   border-radius: 10px;*/
-/* }*/
-/* */
-/* #article {*/
-/*  border-radius: 10px;*/
-/*   vertical-align:top;*/
-/*   margin-left:100px;*/
-/*   padding: 8px 8px ;*/
-/*   background-color: white;*/
-/*   width:950px;*/
-/*    height:120px;*/
-/*   overflow:hidden;*/
-/*   border-style: solid;*/
-/*    border-width: 1px;*/
-/*    border-color: rgb( 192, 192, 192);*/
-/* }*/
-/* */
-/* .menu {*/
-/* */
-/*   background-color: rgb( 0, 51, 102 );*/
-/*   padding: 2px 8px;*/
-/* }*/
-/* */
-/* */
-/* .menu label {*/
-/*   color: white;*/
-/*   vertical-align: middle;*/
-/* }*/
-/* */
-/* .menu a {*/
-/*   text-decoration: none;*/
-/*   color: white;*/
-/*   cursor: pointer;*/
-/*   padding-top: 4px;*/
-/* }*/
-/* */
-/* #content {*/
-/*   padding: 30px;*/
-/* }*/
-/* */
-/* #help {*/
-/*   float: right;*/
-/*   padding-right: 12px;*/
-/* }*/
-/* */
-/* .ui-widget {*/
-/*   font-size: 80%;*/
-/* }*/
-/* */
-/* #content>div {*/
-/*   display: table-row;*/
-/* }*/
-/* */
-/* #content label, .label {*/
-/*   display: table-cell;*/
-/*   text-align: right;*/
-/*   vertical-align: top;*/
-/*   width: 20%;*/
-/*   color: gray;*/
-/*   padding: 0 5px 5px 0;*/
-/* }*/
-/* */
-/* .ui-icon {*/
-/*   display: inline-block;*/
-/*   cursor: pointer;*/
-/* }*/
-/* */
-/* .ui-icon.info {*/
-/*   background-image: url(lib/images/ui-icons_2e83ff_256x240.png);*/
-/* }*/
-/* */
-/* #content ul:not(.chzn-choices) {*/
-/*   padding: 0 20;*/
-/* }*/
-/* */
-/* #console {*/
-/*   text-align: center;*/
-/* }*/
-/* */
-/* #uploader {*/
-/*   display: none;*/
-/* }*/
-/* */
-/* .ok {*/
-/*   color: green;*/
-/* }*/
-/* */
-/* .ko {*/
-/*   color: red;*/
-/* }*/
-/* */
-/* .ok:before {*/
-/*   content: "\2713";*/
-/* }*/
-/* */
-/* .ko:before {*/
-/*   content: "\26a0";*/
-/* }*/
-/* */
-/* .sorted {*/
-/*   font-weight: bold*/
-/* }*/
-/* */
-/*     </style>*/
+/*     <link rel="stylesheet" type="text/css" href="{{ asset("main.css") }}" />*/
 /*     <title>Publications</title>*/
 /*   </head>*/
 /*   */

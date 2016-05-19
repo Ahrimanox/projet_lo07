@@ -28,3 +28,14 @@ f74cb7,::1,GET,http://localhost/projet_lo07/web/app_dev.php/chercheur/included/l
 d18daf,::1,GET,http://localhost/projet_lo07/web/app_dev.php/chercheur/included/lib/chosen.jquery.min.js,1463681514,,404
 9f4677,::1,GET,http://localhost/projet_lo07/web/app_dev.php/chercheur/included/DBLP.png,1463681514,6b1c85,200
 6b1c85,::1,GET,http://localhost/projet_lo07/web/app_dev.php/chercheur/included/DBLP.png,1463681514,,404
+92d7c7,::1,GET,http://localhost/projet_lo07/web/app_dev.php/chercheur/test2,1463682931,875893,200
+875893,::1,GET,http://localhost/projet_lo07/web/app_dev.php/chercheur/test2,1463682931,,500
+4e733b,::1,GET,http://localhost/projet_lo07/web/app_dev.php/chercheur/test2,1463682959,,200
+6de426,::1,GET,http://localhost/projet_lo07/web/app_dev.php/chercheur/test2,1463683092,,200
+8a5448,::1,GET,http://localhost/projet_lo07/web/app_dev.php/chercheur/test2,1463683648,,200
+48fa1b,::1,GET,http://localhost/projet_lo07/web/app_dev.php/chercheur/test2,1463683655,,200
+99d568,::1,GET,http://localhost/projet_lo07/web/app_dev.php/chercheur/test,1463683838,,200
+250039,::1,GET,http://localhost/projet_lo07/web/app_dev.php/chercheur/test,1463683922,,200
+92692c,::1,GET,http://localhost/projet_lo07/web/app_dev.php/chercheur/test,1463683995,,200
+e6cfd4,::1,GET,http://localhost/projet_lo07/web/app_dev.php/chercheur/included/DBLP.png,1463683996,eff76a,200
+eff76a,::1,GET,http://localhost/projet_lo07/web/app_dev.php/chercheur/included/DBLP.png,1463683996,,404

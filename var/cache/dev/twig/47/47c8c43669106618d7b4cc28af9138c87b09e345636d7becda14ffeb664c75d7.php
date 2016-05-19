@@ -15,8 +15,8 @@ class __TwigTemplate_db3d8805e2102146d8df9d0cc9e8cbfbf350733f1bfe272ec9deef300c5
 
     protected function doDisplay(array $context, array $blocks = array())
     {
-        $__internal_8160816fb24dfc4dd5436e5e6ab0c30ac88371935f52f7728b51fd4fa908c29a = $this->env->getExtension("native_profiler");
-        $__internal_8160816fb24dfc4dd5436e5e6ab0c30ac88371935f52f7728b51fd4fa908c29a->enter($__internal_8160816fb24dfc4dd5436e5e6ab0c30ac88371935f52f7728b51fd4fa908c29a_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "PublicationBundle:Chercheur:publications.html.twig"));
+        $__internal_2b88a9cc3ef86d9dbfcadf06094901020c643b3904de50f5ecac80bfac785c26 = $this->env->getExtension("native_profiler");
+        $__internal_2b88a9cc3ef86d9dbfcadf06094901020c643b3904de50f5ecac80bfac785c26->enter($__internal_2b88a9cc3ef86d9dbfcadf06094901020c643b3904de50f5ecac80bfac785c26_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "PublicationBundle:Chercheur:publications.html.twig"));
 
         // line 1
         echo "<html>
@@ -35,7 +35,11 @@ class __TwigTemplate_db3d8805e2102146d8df9d0cc9e8cbfbf350733f1bfe272ec9deef300c5
   
   <body>
     <div id=\"container\">
-     <header><center><h1>Articles dans des revues répertoriées dans les bases de données internationales</h1></center></header>
+      <header>
+      <center>
+        <h1>Articles dans des revues répertoriées dans les   bases de données internationales</h1>
+      </center>
+     </header>
   <form id=\"header\" class=\"menu\" method=\"get\">
     <label for=\"actor\">Publications de</label>&nbsp;
     <select id=\"actor\" name=\"by\">
@@ -63,63 +67,16 @@ class __TwigTemplate_db3d8805e2102146d8df9d0cc9e8cbfbf350733f1bfe272ec9deef300c5
     <select id=\"issued\" name=\"since\"></select>&nbsp;
     <a id=\"help\" href=\"https://github.com/benel/Tire-a-part/wiki\" target=\"_blank\">?&nbsp;</a>
   </form>
-  <script src=\"included/lib/chosen.jquery.min.js\"></script>
 
-
-  <script type=\"text/javascript\">
-
-
-
-    function normalize(string) {
-      return string.toUpperCase()
-        .replace(/[ÂÄÀ]/g, \"A\")
-        .replace(/[ÉÊËÈ]/g, \"E\")
-        .replace(/[ÎÏ]/g, \"I\")
-        .replace(/[ÔÖ]/g, \"O\")
-        .replace(/[ÛÜÙ]/g, \"U\")
-        .replace(/Ç/g, \"C\")
-        .replace(/Ñ/g, \"N\");
-    }
-
-    \$(document).ready(function() {
-      \$(\"[name=by]\").chosen();
-      \$(\"[name=since]\").chosen({disable_search_threshold: 999, width: \"7%\"});
-      \$.ajax({
-        url: \"attribute\",
-        type: \"GET\",
-        dataType: \"json\",
-        success: function(result) {
-          const BY = \"\"; 
-          const SINCE = \"\"; 
-          \$.each(result.rows, function(i, o) {
-            if (o.key[0]==\"issued\" || o.value>1) {
-              var key = (o.key[2]?o.key[2]+\" \":\"\") + o.key[1];
-              \$(\"#\" + o.key[0]).append(
-                '<option value=\"' + normalize(key) + '\">' + key + '</option>'
-              );
-            }
-          });
-          \$(\"[name=by]\").val(BY);
-          \$(\"[name=since]\").val(SINCE);
-          \$(\"select\")
-            .trigger(\"liszt:updated\")
-            .change(function() {
-              \$(\"#header\").submit();
-            });
-        }
-      });
-    });
-
-  </script>    <div id=\"content\">
-         
+  <div id=\"content\">     
   \t<form id=\"option\" class=\"menu\">
-        <button type=\"button\" id=\"create\">Créer...</button></br>
-        <button type=\"button\" id=\"export\">Exporter</button></br>
-        <button type=\"button\" id=\"count\">Compter</button></br>
-        <button type=\"button\" id=\"check_creators\">Vérifier les auteurs...</button></br>
-        <button type=\"button\" id=\"check_titles\">Vérifier les titres...</button>
-      </form>
-          <table>
+      <button type=\"button\" id=\"create\">Créer...</button></br>
+      <button type=\"button\" id=\"export\">Exporter</button></br>
+      <button type=\"button\" id=\"count\">Compter</button></br>
+      <button type=\"button\" id=\"check_creators\">Vérifier les auteurs...</button></br>
+      <button type=\"button\" id=\"check_titles\">Vérifier les titres...</button>
+    </form>
+      <table>
               <tr ><td id=\"article\">
                 <div>Celso Satoshi Sakuraba, Andréa Cynthia Santos, Christian Prins, </div>
                     <div><a href=\"52147e4bf4d14892fcdb4ca30e80417c\">Work-troop scheduling for road network accessibility after a major earthquake.</a></div>
@@ -142,14 +99,14 @@ class __TwigTemplate_db3d8805e2102146d8df9d0cc9e8cbfbf350733f1bfe272ec9deef300c5
                 </div>
               </td></tr>
               
-          </table>
-      </div>
+      </table>
+    </div>
       
     </div>
   </body>
 </html>";
         
-        $__internal_8160816fb24dfc4dd5436e5e6ab0c30ac88371935f52f7728b51fd4fa908c29a->leave($__internal_8160816fb24dfc4dd5436e5e6ab0c30ac88371935f52f7728b51fd4fa908c29a_prof);
+        $__internal_2b88a9cc3ef86d9dbfcadf06094901020c643b3904de50f5ecac80bfac785c26->leave($__internal_2b88a9cc3ef86d9dbfcadf06094901020c643b3904de50f5ecac80bfac785c26_prof);
 
     }
 
@@ -178,7 +135,11 @@ class __TwigTemplate_db3d8805e2102146d8df9d0cc9e8cbfbf350733f1bfe272ec9deef300c5
 /*   */
 /*   <body>*/
 /*     <div id="container">*/
-/*      <header><center><h1>Articles dans des revues répertoriées dans les bases de données internationales</h1></center></header>*/
+/*       <header>*/
+/*       <center>*/
+/*         <h1>Articles dans des revues répertoriées dans les   bases de données internationales</h1>*/
+/*       </center>*/
+/*      </header>*/
 /*   <form id="header" class="menu" method="get">*/
 /*     <label for="actor">Publications de</label>&nbsp;*/
 /*     <select id="actor" name="by">*/
@@ -206,63 +167,16 @@ class __TwigTemplate_db3d8805e2102146d8df9d0cc9e8cbfbf350733f1bfe272ec9deef300c5
 /*     <select id="issued" name="since"></select>&nbsp;*/
 /*     <a id="help" href="https://github.com/benel/Tire-a-part/wiki" target="_blank">?&nbsp;</a>*/
 /*   </form>*/
-/*   <script src="included/lib/chosen.jquery.min.js"></script>*/
 /* */
-/* */
-/*   <script type="text/javascript">*/
-/* */
-/* */
-/* */
-/*     function normalize(string) {*/
-/*       return string.toUpperCase()*/
-/*         .replace(/[ÂÄÀ]/g, "A")*/
-/*         .replace(/[ÉÊËÈ]/g, "E")*/
-/*         .replace(/[ÎÏ]/g, "I")*/
-/*         .replace(/[ÔÖ]/g, "O")*/
-/*         .replace(/[ÛÜÙ]/g, "U")*/
-/*         .replace(/Ç/g, "C")*/
-/*         .replace(/Ñ/g, "N");*/
-/*     }*/
-/* */
-/*     $(document).ready(function() {*/
-/*       $("[name=by]").chosen();*/
-/*       $("[name=since]").chosen({disable_search_threshold: 999, width: "7%"});*/
-/*       $.ajax({*/
-/*         url: "attribute",*/
-/*         type: "GET",*/
-/*         dataType: "json",*/
-/*         success: function(result) {*/
-/*           const BY = ""; */
-/*           const SINCE = ""; */
-/*           $.each(result.rows, function(i, o) {*/
-/*             if (o.key[0]=="issued" || o.value>1) {*/
-/*               var key = (o.key[2]?o.key[2]+" ":"") + o.key[1];*/
-/*               $("#" + o.key[0]).append(*/
-/*                 '<option value="' + normalize(key) + '">' + key + '</option>'*/
-/*               );*/
-/*             }*/
-/*           });*/
-/*           $("[name=by]").val(BY);*/
-/*           $("[name=since]").val(SINCE);*/
-/*           $("select")*/
-/*             .trigger("liszt:updated")*/
-/*             .change(function() {*/
-/*               $("#header").submit();*/
-/*             });*/
-/*         }*/
-/*       });*/
-/*     });*/
-/* */
-/*   </script>    <div id="content">*/
-/*          */
+/*   <div id="content">     */
 /*   	<form id="option" class="menu">*/
-/*         <button type="button" id="create">Créer...</button></br>*/
-/*         <button type="button" id="export">Exporter</button></br>*/
-/*         <button type="button" id="count">Compter</button></br>*/
-/*         <button type="button" id="check_creators">Vérifier les auteurs...</button></br>*/
-/*         <button type="button" id="check_titles">Vérifier les titres...</button>*/
-/*       </form>*/
-/*           <table>*/
+/*       <button type="button" id="create">Créer...</button></br>*/
+/*       <button type="button" id="export">Exporter</button></br>*/
+/*       <button type="button" id="count">Compter</button></br>*/
+/*       <button type="button" id="check_creators">Vérifier les auteurs...</button></br>*/
+/*       <button type="button" id="check_titles">Vérifier les titres...</button>*/
+/*     </form>*/
+/*       <table>*/
 /*               <tr ><td id="article">*/
 /*                 <div>Celso Satoshi Sakuraba, Andréa Cynthia Santos, Christian Prins, </div>*/
 /*                     <div><a href="52147e4bf4d14892fcdb4ca30e80417c">Work-troop scheduling for road network accessibility after a major earthquake.</a></div>*/
@@ -285,8 +199,8 @@ class __TwigTemplate_db3d8805e2102146d8df9d0cc9e8cbfbf350733f1bfe272ec9deef300c5
 /*                 </div>*/
 /*               </td></tr>*/
 /*               */
-/*           </table>*/
-/*       </div>*/
+/*       </table>*/
+/*     </div>*/
 /*       */
 /*     </div>*/
 /*   </body>*/

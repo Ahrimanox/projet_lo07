@@ -59,4 +59,9 @@ class ChercheurController extends Controller
     {
         return $this->render('PublicationBundle:Chercheur:publications.html.twig');
     }
+
+    public function test2Action(Request $request)
+    {
+        return $this->render('PublicationBundle:Default:base.html.twig');
+    }
 }		

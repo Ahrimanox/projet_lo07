@@ -3,7 +3,8 @@
 namespace PublicationBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-
+use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Validator\Constraints as Assert;
 /**
  * Article
  *
@@ -29,25 +30,24 @@ class Article
     private $titre;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="categorie", type="string", length=255)
+     * @ORM\ManyToOne(targetEntity="PublicationBundle\Entity\Categorie")
+     * @ORM\JoinColumn(nullable=false)
      */
     private $categorie;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="ref", type="string", length=255)
-     */
-    private $ref;
-
-    /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="datePublication", type="datetime")
+     * @ORM\Column(name="datePublication", type="string", length=255)
      */
     private $datePublication;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="label", type="string", length=255)
+     */
+    private $label;
 
     /**
      * @var string
@@ -57,33 +57,23 @@ class Article
     private $lieu;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="statut", type="string", length=255)
+     * @ORM\Column(type="string")
+     * 
+     * @Assert\File(mimeTypes={ "application/pdf" })
      */
-    private $statut;
+    private $pdfFile;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="editeur", type="string", length=255)
+     * @ORM\OneToMany(targetEntity="PublicationBundle\Entity\ArticleChercheur", mappedBy="article")
      */
-    private $editeur;
+    private $article_chercheur;
 
-    /**
-     *
-     * @ORM\ManyToMany(targetEntity="PublicationBundle\Entity\Chercheur", cascade={"persist"})
-     * @ORM\JoinTable(name="lo07_article_chercheur")
-     */
-    private $auteurs;
 
 
     public function __construct()
     {
-        $this->datePublication = new \DateTime();
         $this->auteurs = new ArrayCollection();
     }
-
 
     /**
      * Get id
@@ -144,33 +134,9 @@ class Article
     }
 
     /**
-     * Set ref
-     *
-     * @param string $ref
-     *
-     * @return Article
-     */
-    public function setRef($ref)
-    {
-        $this->ref = $ref;
-
-        return $this;
-    }
-
-    /**
-     * Get ref
-     *
-     * @return string
-     */
-    public function getRef()
-    {
-        return $this->ref;
-    }
-
-    /**
      * Set datePublication
      *
-     * @param \DateTime $datePublication
+     * @param string $datePublication
      *
      * @return Article
      */
@@ -184,7 +150,7 @@ class Article
     /**
      * Get datePublication
      *
-     * @return \DateTime
+     * @return string
      */
     public function getDatePublication()
     {
@@ -216,51 +182,118 @@ class Article
     }
 
     /**
-     * Set statut
+     * Set label
      *
-     * @param string $statut
+     * @param string $label
      *
      * @return Article
      */
-    public function setStatut($statut)
+    public function setLabel($label)
     {
-        $this->statut = $statut;
+        $this->label = $label;
 
         return $this;
     }
 
     /**
-     * Get statut
+     * Get label
      *
      * @return string
      */
-    public function getStatut()
+    public function getLabel()
     {
-        return $this->statut;
+        return $this->label;
     }
 
     /**
-     * Set editeur
+     * Add auteur
      *
-     * @param string $editeur
+     * @param \PublicationBundle\Entity\Chercheur $auteur
      *
      * @return Article
      */
-    public function setEditeur($editeur)
+    public function addAuteur(\PublicationBundle\Entity\Chercheur $auteur)
     {
-        $this->editeur = $editeur;
+        $this->auteurs[] = $auteur;
 
         return $this;
     }
 
     /**
-     * Get editeur
+     * Remove auteur
+     *
+     * @param \PublicationBundle\Entity\Chercheur $auteur
+     */
+    public function removeAuteur(\PublicationBundle\Entity\Chercheur $auteur)
+    {
+        $this->auteurs->removeElement($auteur);
+    }
+
+    /**
+     * Get auteurs
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getAuteurs()
+    {
+        return $this->auteurs;
+    }
+
+    /**
+     * Add articleChercheur
+     *
+     * @param \PublicationBundle\Entity\ArticleChercheur $articleChercheur
+     *
+     * @return Article
+     */
+    public function addArticleChercheur(\PublicationBundle\Entity\ArticleChercheur $articleChercheur)
+    {
+        $this->article_chercheur[] = $articleChercheur;
+
+        return $this;
+    }
+
+    /**
+     * Remove articleChercheur
+     *
+     * @param \PublicationBundle\Entity\ArticleChercheur $articleChercheur
+     */
+    public function removeArticleChercheur(\PublicationBundle\Entity\ArticleChercheur $articleChercheur)
+    {
+        $this->article_chercheur->removeElement($articleChercheur);
+    }
+
+    /**
+     * Get articleChercheur
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getArticleChercheur()
+    {
+        return $this->article_chercheur;
+    }
+
+    /**
+     * Set pdfFile
+     *
+     * @param string $pdfFile
+     *
+     * @return Article
+     */
+    public function setPdfFile($pdfFile)
+    {
+        $this->pdfFile = $pdfFile;
+
+        return $this;
+    }
+
+    /**
+     * Get pdfFile
      *
      * @return string
      */
-    public function getEditeur()
+    public function getPdfFile()
     {
-        return $this->editeur;
+        return $this->pdfFile;
     }
 }
-

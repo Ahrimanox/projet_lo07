@@ -109,6 +109,37 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
             return array (  '_controller' => 'PublicationBundle\\Controller\\DefaultController::indexAction',  '_route' => 'publication_homepage',);
         }
 
+        if (0 === strpos($pathinfo, '/user')) {
+            if (0 === strpos($pathinfo, '/user/log')) {
+                // publication_user_login
+                if ($pathinfo === '/user/loginUser') {
+                    return array (  '_controller' => 'PublicationBundle\\Controller\\UserController::loginUserAction',  '_route' => 'publication_user_login',);
+                }
+
+                // publication_user_logout
+                if ($pathinfo === '/user/logoutUser') {
+                    return array (  '_controller' => 'PublicationBundle\\Controller\\UserController::logoutUserAction',  '_route' => 'publication_user_logout',);
+                }
+
+            }
+
+            // publication_user_add
+            if ($pathinfo === '/user/add') {
+                return array (  '_controller' => 'PublicationBundle\\Controller\\UserController::addAction',  '_route' => 'publication_user_add',);
+            }
+
+            // publication_user_valid
+            if ($pathinfo === '/user/valid') {
+                return array (  '_controller' => 'PublicationBundle\\Controller\\UserController::validAction',  '_route' => 'publication_user_valid',);
+            }
+
+        }
+
+        // publication_hello
+        if ($pathinfo === '/hello') {
+            return array (  '_controller' => 'PublicationBundle\\Controller\\DefaultController::helloAction',  '_route' => 'publication_hello',);
+        }
+
         if (0 === strpos($pathinfo, '/chercheur')) {
             // publication_chercheur
             if ($pathinfo === '/chercheur') {
@@ -125,17 +156,110 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
                 return array (  '_controller' => 'PublicationBundle\\Controller\\ChercheurController::addAction',  '_route' => 'publication_chercheur_add',);
             }
 
-            if (0 === strpos($pathinfo, '/chercheur/test')) {
-                // publication_chercheur_test
-                if ($pathinfo === '/chercheur/test') {
-                    return array (  '_controller' => 'PublicationBundle\\Controller\\ChercheurController::testAction',  '_route' => 'publication_chercheur_test',);
+            // publication_chercheur_valid
+            if ($pathinfo === '/chercheur/valid') {
+                return array (  '_controller' => 'PublicationBundle\\Controller\\ChercheurController::validAction',  '_route' => 'publication_chercheur_valid',);
+            }
+
+        }
+
+        if (0 === strpos($pathinfo, '/article')) {
+            // publication_article_view
+            if (0 === strpos($pathinfo, '/article/view') && preg_match('#^/article/view(?:/(?P<id>\\d+))?$#s', $pathinfo, $matches)) {
+                return $this->mergeDefaults(array_replace($matches, array('_route' => 'publication_article_view')), array (  '_controller' => 'PublicationBundle\\Controller\\ArticleController::viewAction',  'id' => 0,));
+            }
+
+            // publication_article_add
+            if ($pathinfo === '/article/add') {
+                return array (  '_controller' => 'PublicationBundle\\Controller\\ArticleController::addAction',  '_route' => 'publication_article_add',);
+            }
+
+            // publication_article_valid
+            if ($pathinfo === '/article/valid') {
+                return array (  '_controller' => 'PublicationBundle\\Controller\\ArticleController::validAction',  '_route' => 'publication_article_valid',);
+            }
+
+            if (0 === strpos($pathinfo, '/article/modif')) {
+                // publication_article_modif
+                if (preg_match('#^/article/modif(?:/(?P<id>\\d+))?$#s', $pathinfo, $matches)) {
+                    return $this->mergeDefaults(array_replace($matches, array('_route' => 'publication_article_modif')), array (  '_controller' => 'PublicationBundle\\Controller\\ArticleController::modifAction',  'id' => 0,));
                 }
 
-                // publication_chercheur_test2
-                if ($pathinfo === '/chercheur/test2') {
-                    return array (  '_controller' => 'PublicationBundle\\Controller\\ChercheurController::test2Action',  '_route' => 'publication_chercheur_test2',);
+                // publication_article_modif_valid
+                if (0 === strpos($pathinfo, '/article/modifValid') && preg_match('#^/article/modifValid(?:/(?P<id>\\d+))?$#s', $pathinfo, $matches)) {
+                    return $this->mergeDefaults(array_replace($matches, array('_route' => 'publication_article_modif_valid')), array (  '_controller' => 'PublicationBundle\\Controller\\ArticleController::modifValidAction',  'id' => 0,));
                 }
 
+            }
+
+        }
+
+        if (0 === strpos($pathinfo, '/laboratoire')) {
+            // publication_laboratoire_view
+            if (0 === strpos($pathinfo, '/laboratoire/view') && preg_match('#^/laboratoire/view(?:/(?P<id>\\d+))?$#s', $pathinfo, $matches)) {
+                return $this->mergeDefaults(array_replace($matches, array('_route' => 'publication_laboratoire_view')), array (  '_controller' => 'PublicationBundle\\Controller\\LaboratoireController::viewAction',  'id' => 0,));
+            }
+
+            // publication_laboratoire_add
+            if ($pathinfo === '/laboratoire/add') {
+                return array (  '_controller' => 'PublicationBundle\\Controller\\LaboratoireController::addAction',  '_route' => 'publication_laboratoire_add',);
+            }
+
+        }
+
+        if (0 === strpos($pathinfo, '/organisation')) {
+            // publication_organisation_view
+            if (0 === strpos($pathinfo, '/organisation/view') && preg_match('#^/organisation/view(?:/(?P<id>\\d+))?$#s', $pathinfo, $matches)) {
+                return $this->mergeDefaults(array_replace($matches, array('_route' => 'publication_organisation_view')), array (  '_controller' => 'PublicationBundle\\Controller\\OrganisationController::viewAction',  'id' => 0,));
+            }
+
+            // publication_organisation_add
+            if ($pathinfo === '/organisation/add') {
+                return array (  '_controller' => 'PublicationBundle\\Controller\\OrganisationController::addAction',  '_route' => 'publication_organisation_add',);
+            }
+
+        }
+
+        if (0 === strpos($pathinfo, '/categorie')) {
+            // publication_categorie_view
+            if (0 === strpos($pathinfo, '/categorie/view') && preg_match('#^/categorie/view(?:/(?P<id>\\d+))?$#s', $pathinfo, $matches)) {
+                return $this->mergeDefaults(array_replace($matches, array('_route' => 'publication_categorie_view')), array (  '_controller' => 'PublicationBundle\\Controller\\CategorieController::viewAction',  'id' => 0,));
+            }
+
+            // publication_categorie_add
+            if ($pathinfo === '/categorie/add') {
+                return array (  '_controller' => 'PublicationBundle\\Controller\\CategorieController::addAction',  '_route' => 'publication_categorie_add',);
+            }
+
+        }
+
+        // publication_chercheur_article_view
+        if (0 === strpos($pathinfo, '/article/viewByChercheur') && preg_match('#^/article/viewByChercheur(?:/(?P<id>\\d+))?$#s', $pathinfo, $matches)) {
+            return $this->mergeDefaults(array_replace($matches, array('_route' => 'publication_chercheur_article_view')), array (  '_controller' => 'PublicationBundle\\Controller\\ArticleController::viewByChercheurAction',  'id' => 0,));
+        }
+
+        if (0 === strpos($pathinfo, '/recherche')) {
+            // publication_recherche
+            if ($pathinfo === '/recherche') {
+                return array (  '_controller' => 'PublicationBundle\\Controller\\RechercheController::indexAction',  '_route' => 'publication_recherche',);
+            }
+
+            // publication_recherche_valid
+            if ($pathinfo === '/recherche/valid') {
+                return array (  '_controller' => 'PublicationBundle\\Controller\\RechercheController::validAction',  '_route' => 'publication_recherche_valid',);
+            }
+
+        }
+
+        if (0 === strpos($pathinfo, '/stats')) {
+            // publication_statistiques
+            if ($pathinfo === '/stats') {
+                return array (  '_controller' => 'PublicationBundle\\Controller\\StatistiquesController::indexAction',  '_route' => 'publication_statistiques',);
+            }
+
+            // publication_statistiques_get
+            if ($pathinfo === '/stats/gets') {
+                return array (  '_controller' => 'PublicationBundle\\Controller\\StatistiquesController::getAction',  '_route' => 'publication_statistiques_get',);
             }
 
         }

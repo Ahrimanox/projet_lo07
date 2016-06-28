@@ -10,4 +10,64 @@ namespace PublicationBundle\Repository;
  */
 class ArticleRepository extends \Doctrine\ORM\EntityRepository
 {
+	public function findByChercheur($idCher)
+	{
+		$em = $this
+			->_em;
+
+		$query = $em->createQuery(
+									'SELECT a FROM PublicationBundle:Article a JOIN a.article_chercheur ac JOIN ac.chercheur c WHERE c.id = ?1 ORDER BY a.datePublication DESC'
+								 );
+		$query->setParameter(1, $idCher);
+		return $query
+			->getResult();
+	}
+
+	public function findByLaboratoireAndYear($idLabo, $annee)
+	{
+		$em = $this
+			->_em;
+
+		$query = $em->createQuery(
+									'SELECT a FROM PublicationBundle:Article a JOIN a.article_chercheur ac JOIN ac.chercheur c JOIN c.laboratoire l WHERE l.id = ?1 AND a.datePublication > ?2 ORDER BY a.datePublication DESC'
+								 );
+		$query->setParameter(1, $idLabo);
+		$query->setParameter(2, $annee);
+		return $query
+			->getResult();
+	}
+
+	public function findByCooporate($id)
+	{
+		$em = $this
+			->_em;
+
+		$query = $em->createQuery(
+									'SELECT a FROM PublicationBundle:Article a JOIN a.auteurs c WHERE c.id = ?1 ORDER BY a.datePublication DESC'
+								 );
+		$query->setParameter(1, $id);
+		return $query
+			->getResult();
+	}
+
+	public function findNumberOfArticleByYearAndByChercheur($idCher, $minAnnee, $maxAnnee)
+	{
+		$em = $this
+			->_em;
+
+		$query = $em->createQuery(
+									'SELECT a.datePublication AS year, COUNT(a.id) AS num
+									FROM PublicationBundle:Article a
+									JOIN a.article_chercheur ac
+									JOIN ac.chercheur c
+									WHERE c.id = ?1
+									AND a.datePublication BETWEEN ?2 AND ?3
+									GROUP BY a.datePublication'
+								 );
+		$query->setParameter(1, $idCher);
+		$query->setParameter(2, '' . $minAnnee);
+		$query->setParameter(3, '' . $maxAnnee);
+		return $query
+			->getResult();
+	}
 }

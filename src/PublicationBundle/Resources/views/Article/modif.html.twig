@@ -1,0 +1,99 @@
+{% extends "PublicationBundle:Default:base.html.twig" %}
+
+{% block title %}Modification d'un article{% endblock %}
+{% block header %}
+<script type="text/javascript">
+var nbchercheur = $('#nbchercheur').val();
+
+var change = function(pos, sens)
+{
+	var chLink = '#ch' + pos;
+	var idLink = '#id' + pos;
+
+	//var temp_ord = 	$(ordLink).text();
+	var temp_ch = 	$(chLink).text();
+	var temp_id = 	$(idLink).val();
+
+	if (sens == '-')
+	{
+		$(chLink).text($('#ch' + (pos+1)).text());
+		$(idLink).val($('#id' + (pos+1)).val());
+
+		$('#ch' + (pos+1)).text(temp_ch);
+		$('#id' + (pos+1)).val(temp_id);
+	}
+	else if (sens == '+')
+	{
+		$(chLink).text($('#ch' + (pos-1)).text());
+		$(idLink).val($('#id' + (pos-1)).val());
+
+		$('#ch' + (pos-1)).text(temp_ch);
+		$('#id' + (pos-1)).val(temp_id);
+	}
+}
+</script>
+{% endblock %}
+
+{% block body %}
+
+<form id="form" role="form" action="{{ path("publication_article_modif_valid", {id: article.id}) }}" class="col-sm-6" method="post" enctype="multipart/form-data">
+	<div class="form-group">
+		<label for="titre">Titre :</label>
+		<input required type="text" class="form-control" id="titre" name="titre" value="{{ article.titre }}" />
+	</div>
+
+	<div class="form-group">
+		<label for="label">Label :</label>
+		<input required type="text" class="form-control" id="label" name="label" value="{{ article.label }}" />
+	</div>
+
+	<div class="form-group">
+		<label for="categorie">Categorie :</label>
+		<input disabled required value="{{ article.categorie.abreviation }}" class="form-control" id="categorie" name="categorie" />
+	</div>
+
+	{% if article.lieu != null %}
+		<div class="form-group" id="lieuHtml">
+			<label for="lieu">Lieu de la conférence :</label>
+			<input class="form-control" type="text" id="lieu" name="lieu" />
+		</div>
+	{% endif %}
+
+	<div class="form-group">
+		<label for="datePublication">Date de publication :</label>
+		<input disabled pattern="[0-9]{4}" required class="form-control" value="{{ article.datePublication }}" type="text" id="datePublication" name="datePublication" />
+	</div>
+
+	<input type="hidden" value="{{ nbchercheur }}" name="nbchercheur" />
+	<div class="form-group">
+		<table class="table table-striped">
+			{% set c = 1 %}
+			{% for ordre, chercheur in chercheurs %}
+				<tr>
+					<td id="ord{{c}}">{{ ordre }}</td>
+					<td id="ch{{c}}">{{ chercheur.prenom }} {{ chercheur.nom }}</td>
+					<input type="hidden" id="id{{c}}" name="{{c}}" value="{{ chercheur.id }}" />
+					{% if nbchercheur > 1 %}
+						<td>
+							{% if c == 1 %}
+								<button class="btn btn-danger btn-sm" type="button" onclick="change({{c}}, '-')"><span class="glyphicon glyphicon-minus"></span></button>
+							{% elseif c == chercheurs|length %}
+								<button class="btn btn-primary btn-sm" type="button" onclick="change({{c}}, '+')"><span class="glyphicon glyphicon-plus"></span></button>
+							{% else %}
+								<button class="btn btn-danger btn-sm" type="button" onclick="change({{c}}, '-')"><span class="glyphicon glyphicon-minus"></span></button>
+								<button class="btn btn-primary btn-sm" type="button" onclick="change({{c}}, '+')"><span class="glyphicon glyphicon-plus"></span></button>
+							{% endif %}
+						</td>
+					{% endif %}
+				</tr>
+				{% set c = c+1 %}
+			{% endfor %}
+		</table>
+	</div>
+	<input id="nombreAutheurs" type="hidden" value="1" />
+
+	<button type="submit" class="btn btn-default">Enregistrer</button>
+
+</form>
+
+{% endblock %}

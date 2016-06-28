@@ -3,12 +3,16 @@
 namespace PublicationBundle\Controller;
 
 use PublicationBundle\Entity\Chercheur;
-use PublicationBundle\Form\Type\ChercheurType;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
 use Symfony\Component\HttpFoundation\Response;
+
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 
 class ChercheurController extends Controller
 {
@@ -24,44 +28,86 @@ class ChercheurController extends Controller
 			->getManager()
 			->getRepository("PublicationBundle:Chercheur");
 
-		$listChercheur = $rep->findAll();
+		$listeChercheur = $rep->findAll();
 
-    	return $this->render("PublicationBundle:Chercheur:view.html.twig", array("listChercheur" => $listChercheur));
+    	return $this->render("PublicationBundle:Chercheur:view.html.twig", array("listeChercheur" => $listeChercheur));
     }
 
     public function addAction(Request $request)
     {
-    	$ch = new Chercheur();
-        $ch->setNom("Lemercier");
-        $ch->setPrenom("Marc");
-        $ch->setOrganisation("UTT");
-        $ch->setEquipe("ERA");
 
-        $form = $this->createForm(ChercheurType::class, $ch);
+        $repOrga = $this
+            ->getDoctrine()
+            ->getManager()
+            ->getRepository("PublicationBundle:Organisation");
 
-        $form->handleRequest($request);
+        $listeOrganisation = $repOrga->findAll();
 
-        if ($form->isSubmitted() && $form->isValid())
-        {
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($ch);
-            $em->flush();
+        $repLabo = $this
+            ->getDoctrine()
+            ->getManager()
+            ->getRepository("PublicationBundle:Laboratoire");
 
-            return $this->redirectToRoute('publication_chercheur_view');
-        }
+        $listeLaboratoire = $repLabo->findAll();
+        
 
-        return $this->render('PublicationBundle:Chercheur:new.html.twig', array(
-            'form' => $form->createView()
+        return $this->render('PublicationBundle:Chercheur:add2.html.twig', array(
+            'listeOrganisation' => $listeOrganisation,
+            'listeLaboratoire' => $listeLaboratoire
         ));
     }
 
-    public function testAction(Request $request)
+    public function validAction(Request $request)
     {
-        return $this->render('PublicationBundle:Chercheur:publications.html.twig');
-    }
+        if ($request->get('nom') == null)
+        {
+            return new Response('Pas de nom');
+        }
+        if ($request->get('prenom') == null)
+        {
+            return new Response('Pas de prenom');
+        }
+        if ($request->get('organisation') == null)
+        {
+            return new Response('Pas de organisation');
+        }
+        if ($request->get('laboratoire') == null)
+        {
+            return new Response('Pas de laboratoire');
+        }
+        if (!isset($_FILES['picture']))
+        {
+            return new Response(serialize($_FILES['picture']));
+        }
 
-    public function test2Action(Request $request)
-    {
-        return $this->render('PublicationBundle:Default:base.html.twig');
+        $chercheur = new Chercheur();
+        $chercheur->setNom($request->get('nom'));
+        $chercheur->setPrenom($request->get('prenom'));
+        
+        $em = $this
+                ->getDoctrine()
+                ->getManager();
+
+        $repOrga = $em->getRepository('PublicationBundle:Laboratoire');
+        $labo = $repOrga->findOneById($request->get('laboratoire'));
+        $chercheur->setLaboratoire($labo);
+
+        $chercheur->setOrganisation($labo->getOrganisation());
+
+
+        // Upload de la photo de profil
+        $nom = $_FILES['picture']['name'];
+
+        if(!move_uploaded_file($_FILES['picture']['tmp_name'], $this->getParameter('fileDir') . $nom))
+        {
+            echo "Merde";
+        }
+
+        $chercheur->setPicture($nom);
+
+        $em->persist($chercheur);
+        $em->flush();
+
+        return $this->redirectToRoute('publication_chercheur_view');
     }
 }		

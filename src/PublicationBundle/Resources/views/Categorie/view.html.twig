@@ -1,0 +1,18 @@
+{% extends "PublicationBundle:Default:base.html.twig" %}
+
+{% block title %}Liste des categories{% endblock %}
+{% block header %}{% endblock %}
+
+{% block body %}
+
+{% if categorie is defined %}
+	<h1>{{ categorie.id }} : {{ categorie.nom }}</h1>
+{% else %}
+<ul>
+{% for categorie in listeCategorie %}
+	<li>{{ categorie.id }} : {{ categorie.nom }}</li>
+{% endfor %}
+</ul>
+{% endif %}
+
+{% endblock %}

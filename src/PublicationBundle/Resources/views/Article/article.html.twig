@@ -1,0 +1,27 @@
+{% for element in liste %}
+	<div class="container col-sm-10 article">
+		<a href="{{ path("publication_article_view", { "id" : element[0].id }) }}">
+			<h4>{{ element[0].titre | upper }}</h4>
+		</a>
+		
+		<div>
+			<bold>
+			{% for ordre, chercheur in element[1] %}
+				<a href="{{ path('publication_chercheur_article_view', {id: chercheur.id}) }}">{{ chercheur.prenom }} {{ chercheur.nom }}</a>,
+			{% endfor %}
+			</bold>
+		</div>
+
+		<div>
+		<i>
+		{{ element[0].label }}
+		</i>
+		</div>
+
+		<div>{{ element[0].categorie.abreviation }}</div>
+		<div class="btn-group bouton_infos">
+		    <a href="{{ asset('uploads/' ~ element[0].pdfFile) }}" type="button" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-download-alt"></span> Telecharger</a>
+		    <a href="{{ path('publication_article_modif', {id: element[0].id}) }}" type="button" class="btn btn-success btn-sm"><span class="glyphicon glyphicon-edit"></span> Modifier</a>
+	  	</div>
+	</div>
+{% endfor %}

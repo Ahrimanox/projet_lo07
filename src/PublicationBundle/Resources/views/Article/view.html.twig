@@ -1,0 +1,67 @@
+{% extends "PublicationBundle:Default:base.html.twig" %}
+
+{% block title %}Article{% endblock %}
+{% block header %}{% endblock %}
+
+{% block body %}
+
+{% if article is defined %}
+
+<div class="container col-sm-12 article">
+	<h4>{{ article.titre | upper }}</h4>
+
+	<div>
+		Autheurs : 
+		<bold>
+		{% for ordre, chercheur in chercheurs %}
+			{{ ordre }} {{ chercheur.prenom }} {{ chercheur.nom }},
+		{% endfor %}
+		</bold>
+	</div>
+
+	<div>
+		Label :
+		<i>
+		{{ article.label }}
+		</i>
+	</div>
+
+	<div>
+		Categorie : {{ article.categorie.nom }}
+	</div>
+
+	<div>
+		Date : {{ article.datePublication }}
+	</div>
+
+	<div>
+		Lieu : {{ article.lieu }}
+	</div>
+</div>
+<div class="col-sm-3"></div>
+<div class="col-sm-6"><h3>A Propos des Acteurs :</h3></div>
+<div class="col-sm-3"></div>
+
+<div class="container col-sm-12">
+<div class="container col-sm-1"></div>
+{% for ordre, chercheur in chercheurs %}
+	<div class="container col-sm-2 auteur">
+		<div class="container col-sm-12">
+			<a href="{{ path('publication_chercheur_view', {id: chercheur.id}) }}"><img src="{{ asset('uploads/' ~ chercheur.picture) }}" alt="Photo" class="img img-rounded" width="100" height="100" /></a>
+		</div>
+		<div class="container col-sm-12">
+			<i>{{ chercheur.prenom }} {{ chercheur.nom }}</i>
+		</div>
+	</div>
+	<div class="container col-sm-2">
+	</div>
+{% endfor %}
+</div>
+
+{% else %}
+
+{% include "PublicationBundle:Article:article.html.twig" %}
+
+{% endif %}
+
+{% endblock %}

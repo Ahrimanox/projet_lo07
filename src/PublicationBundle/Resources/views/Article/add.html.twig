@@ -1,0 +1,116 @@
+{% extends "PublicationBundle:Default:base.html.twig" %}
+
+{% block title %}Ajout d'un article{% endblock %}
+{% block header %}
+<script type="text/javascript">
+	var checkCategorie = function(value)
+	{
+		if (value == 2 || value == 4)
+		{
+			$("#lieuHtml").attr("required", "");
+			$("#lieuHtml").show();
+		}
+		else
+		{
+			$("#lieuHtml").removeAttr("required");
+			$("#lieuHtml").hide();
+		}
+	}
+
+	var nombreAutheur = 1;
+	var selects = new Array();
+	var last = $('#autheurs');
+	$(document).ready(function() {
+		$('#file').bootstrapFileInput();
+		$("#categorie").val(1);
+		$("#lieuHtml").hide();
+
+		selects.push($("#autheurs"));
+
+		$("#plus").click(function() {
+			last = $("#autheurs").clone();
+			$(this).before(last);
+
+			foreach (elm in selects)
+			{
+				var value = elm.val();
+
+				
+			}
+			
+			selects.push(last);
+			nombreAutheur++;
+
+
+		});
+		$("#minus").click(function() {
+			var value = last.val();
+
+			last = $("#autheurs").clone()
+			if (nombreAutheur > 1)
+			{
+				$("#autheurs").remove();
+				nombreAutheur--;
+			}
+		});
+	});
+
+
+
+</script>
+{% endblock %}
+
+{% block body %}
+
+<form id="form" role="form" action="{{ path("publication_article_valid") }}" class="col-sm-6" method="post" enctype="multipart/form-data">
+
+	<div class="form-group">
+		<label for="titre">Titre :</label>
+		<input required type="text" class="form-control" id="titre" name="titre" />
+	</div>
+
+	<div class="form-group">
+		<label for="label">Label :</label>
+		<input required type="text" class="form-control" id="label" name="label" />
+	</div>
+
+	<div class="form-group">
+		<label for="categorie">Categorie :</label>
+		<select required class="form-control" id="categorie" name="categorie" onchange="checkCategorie(this.value)">
+		{% for categorie in listeCategorie %}
+		<option value="{{ categorie.id }}">{{ categorie.abreviation }} : {{ categorie.nom }}</option>
+		{% endfor %}
+		</select>
+	</div>
+
+	<div class="form-group" id="lieuHtml">
+		<label for="lieu">Lieu de la conférence :</label>
+		<input class="form-control" type="text" id="lieu" name="lieu" />
+	</div>
+
+	<div class="form-group">
+		<label for="datePublication">Date de publication :</label>
+		<input pattern="[0-9]{4}" required class="form-control" type="text" id="datePublication" name="datePublication" />
+	</div>
+
+	<div class="form-group">
+		<input required class="" type="file" title="Rechercher un fichier (.pdf)" name="pdfFile" />
+	</div>
+
+	<div class="form-group">
+		<label form="autheur">Autheur(s) :</label>
+		<select required class="form-control" id="autheurs" name="autheurs[]">
+		{% for chercheur in listeChercheur %}
+		<option value="{{ chercheur.id }}">{{ chercheur.nom }} {{ chercheur.prenom }}</option>
+		{% endfor %}
+		</select>
+		<button type="button" id="plus" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span></button>
+		<button type="button" id="minus" class="btn btn-primary"><span class="glyphicon glyphicon-minus"></span></button>
+	</div>
+	<input id="nombreAutheurs" type="hidden" value="1" />
+
+	<button type="submit" class="btn btn-default">Enregistrer</button>
+
+</form>
+
+{% endblock %}

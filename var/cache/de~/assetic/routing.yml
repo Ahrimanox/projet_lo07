@@ -1,0 +1,5 @@
+_assetic:
+    resource: .
+    type: assetic
+_app:
+    resource: 'C:\Users\Ahrimanox\wamp64\www\projet_lo07\app/config/routing_dev.yml'

@@ -10,4 +10,5 @@ namespace PublicationBundle\Repository;
  */
 class ChercheurRepository extends \Doctrine\ORM\EntityRepository
 {
+
 }

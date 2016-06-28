@@ -2,6 +2,26 @@ publication_homepage:
     path:     /
     defaults: { _controller: PublicationBundle:Default:index }
 
+publication_user_login:
+    path:     /user/loginUser
+    defaults: { _controller: PublicationBundle:User:loginUser }
+
+publication_user_logout:
+    path:     /user/logoutUser
+    defaults: { _controller: PublicationBundle:User:logoutUser }
+
+publication_user_add:
+    path:     /user/add
+    defaults: { _controller: PublicationBundle:User:add }
+
+publication_user_valid:
+    path:     /user/valid
+    defaults: { _controller: PublicationBundle:User:valid }    
+
+publication_hello:
+    path:     /hello
+    defaults: {_controller: PublicationBundle:Default:hello }    
+
 publication_chercheur:
     path:     /chercheur
     defaults: {_controller: PublicationBundle:Chercheur:index }
@@ -14,10 +34,84 @@ publication_chercheur_add:
     path:     /chercheur/add
     defaults: {_controller: PublicationBundle:Chercheur:add }
 
-publication_chercheur_test:
-    path:     /chercheur/test
-    defaults: {_controller: PublicationBundle:Chercheur:test }
+publication_chercheur_valid:
+    path:     /chercheur/valid
+    defaults: {_controller: PublicationBundle:Chercheur:valid }
 
-publication_chercheur_test2:
-    path:    /chercheur/test2
-    defaults: {_controller: PublicationBundle:Chercheur:test2 }
+publication_article_view:
+    path:     /article/view/{id}
+    defaults: {_controller: PublicationBundle:Article:view, id: 0 }
+    requirements:
+        id:   \d+
+
+publication_article_add:
+    path:     /article/add
+    defaults: {_controller: PublicationBundle:Article:add }
+
+publication_article_valid:
+    path:     /article/valid
+    defaults: {_controller: PublicationBundle:Article:valid}
+
+publication_article_modif:
+    path:     /article/modif/{id}
+    defaults: {_controller: PublicationBundle:Article:modif, id: 0 }
+    requirements:
+        id:   \d+
+
+publication_article_modif_valid:
+    path:     /article/modifValid/{id}
+    defaults: {_controller: PublicationBundle:Article:modifValid, id: 0 }
+    requirements:
+        id:   \d+
+
+publication_laboratoire_view:
+    path:     /laboratoire/view/{id}
+    defaults: {_controller: PublicationBundle:Laboratoire:view, id: 0 }
+    requirements:
+        id:   \d+
+
+publication_laboratoire_add:
+    path:     /laboratoire/add
+    defaults: {_controller: PublicationBundle:Laboratoire:add }
+
+publication_organisation_view:
+    path:     /organisation/view/{id}
+    defaults: {_controller: PublicationBundle:Organisation:view, id: 0 }
+    requirements:
+        id:   \d+
+
+publication_organisation_add:
+    path:     /organisation/add
+    defaults: {_controller: PublicationBundle:Organisation:add }   
+
+publication_categorie_view:
+    path:     /categorie/view/{id}
+    defaults: {_controller: PublicationBundle:Categorie:view, id: 0 }
+    requirements:
+        id:   \d+
+
+publication_categorie_add:
+    path:     /categorie/add
+    defaults: {_controller: PublicationBundle:Categorie:add }
+
+publication_chercheur_article_view:
+    path:     /article/viewByChercheur/{id}
+    defaults: {_controller: PublicationBundle:Article:viewByChercheur, id: 0}
+    requirements:
+        id:   \d+
+
+publication_recherche:
+    path:     /recherche
+    defaults: {_controller: PublicationBundle:Recherche:index }
+
+publication_recherche_valid:
+    path:     /recherche/valid
+    defaults: {_controller: PublicationBundle:Recherche:valid }
+
+publication_statistiques:
+    path:     /stats
+    defaults: {_controller: PublicationBundle:Statistiques:index }
+
+publication_statistiques_get:
+    path:     /stats/gets
+    defaults: {_controller: PublicationBundle:Statistiques:get }

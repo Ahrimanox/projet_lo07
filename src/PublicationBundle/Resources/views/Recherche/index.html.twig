@@ -1,0 +1,83 @@
+{% extends "PublicationBundle:Default:base.html.twig" %}
+
+{% block title %}Recherche{% endblock %}
+{% block header %}{% endblock %}
+
+{% block body %}
+<div class="container">
+	<form id="form1" role="form" class="col-sm-3" method="post" action={{ path("publication_recherche_valid") }}>
+		<h4>Par laboratoire et par annee</h4>
+		<div class="form-group">
+			<label for="laboratoire">Laboratoire :</label>
+			<select id="laboratoire" class="form-control" name="laboratoire">
+			<option selected="selected">-- Choix du laboratoire --</option>
+			{% for laboratoire in listeLaboratoire %}
+				<option value="{{ laboratoire.id }}">{{ laboratoire.nom }}</option>
+			{% endfor %}
+			</select>
+		</div>
+
+		<div class="form-group">
+			<label for="annee">A partir de quelle annee :</label>
+			<input type="text" id="annee" name="annee" class="form-control" />
+		</div>
+
+		<input name="type" type="hidden" value="1" />
+
+		<div>
+			<button type="submit" class="btn btn-default">Rechercher</button>	
+		</div>
+	</form>
+
+
+	<form id="form2" role="form" class="col-sm-3" method="post" action={{ path("publication_recherche_valid") }}>
+		<h4>Par chercheur</h4>
+		<div class="form-group">
+			<label for="chercheur1">Chercheur :</label>
+			<select id="chercheur1" class="form-control" name="chercheur">
+			<option selected="selected">-- Choix du chercheur --</option>
+			{% for chercheur in listeChercheur %}
+				<option value="{{ chercheur.id }}">{{ chercheur.prenom }} {{ chercheur.nom }}</option>
+			{% endfor %}
+			</select>
+		</div>
+
+		<input name="type" type="hidden" value="2" />
+
+		<div>
+			<button type="submit" class="btn btn-default">Rechercher</button>	
+		</div>
+	</form>
+
+	<form id="form3" role="form" class="col-sm-3" method="post" action={{ path("publication_recherche_valid") }}>
+		<h4>Par chercheur et collaboration</h4>
+		<div class="form-group">
+			<label for="chercheur2">Chercheur :</label>
+			<select id="chercheur2" class="form-control" name="chercheur">
+			<option selected="selected">-- Choix du chercheur --</option>
+			{% for chercheur in listeChercheur %}
+				<option value="{{ chercheur.id }}">{{ chercheur.prenom }} {{ chercheur.nom }}</option>
+			{% endfor %}
+			</select>
+		</div>
+
+		<input name="type" type="hidden" value="3" />
+
+		<div>
+			<button type="submit" class="btn btn-default">Rechercher</button>	
+		</div>
+	</form>
+</div>
+
+<div class="container col-sm-12">
+{% if liste is defined %}
+	{% if liste|length >= 1 %}
+		{% include "PublicationBundle:Article:article.html.twig" %}
+	{% else %}
+		<h1>Pas de resultats - Methode n° {{ methode }}</h1>
+	{% endif %}	
+{% endif %}
+</div>
+
+
+{% endblock %}

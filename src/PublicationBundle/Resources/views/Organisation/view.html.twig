@@ -1,0 +1,18 @@
+{% extends "PublicationBundle:Default:base.html.twig" %}
+
+{% block title %}Liste des organisations{% endblock %}
+{% block header %}{% endblock %}
+
+{% block body %}
+
+{% if organisation is defined %}
+	<h1>{{ organisation.id }} : {{ organisation.nom }}</h1>
+{% else %}
+<ul>
+{% for organisation in listeOrganisation %}
+	<li>{{ organisation.id }} : {{ organisation.nom }}</li>
+{% endfor %}
+</ul>
+{% endif %}
+
+{% endblock %}

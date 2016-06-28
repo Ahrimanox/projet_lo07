@@ -1,0 +1,49 @@
+{% extends "PublicationBundle:Default:base.html.twig" %}
+
+{% block title %}Ajout d'un chercheur{% endblock %}
+{% block header %}
+<script type="text/javascript">
+$('#file-input').bootstrapFileInput();
+</script>
+{% endblock %}
+
+{% block body %}
+{{ form_start(form, {"attr": {"role": "form", "class": "col-sm-6"}}) }}
+
+	<div class="form-group">
+		{{ form_label(form.nom, "Nom : ") }}
+		{{ form_widget(form.nom, {"attr": {"class": "form-control"}}) }}
+		{{ form_errors(form.nom) }}
+	</div>
+
+	<div class="form-group">
+		{{ form_label(form.prenom, "Prenom : ") }}
+		{{ form_widget(form.prenom, {"attr": {"class": "form-control"}}) }}
+		{{ form_errors(form.prenom) }}
+	</div>
+
+	<div class="form-group">
+		{{ form_label(form.organisation, "Organisation : ") }} 
+		{{ form_widget(form.organisation, {"attr": {"class": "form-control"}}) }}
+		{{ form_errors(form.organisation) }}
+	</div>
+
+	<div class="form-group">
+		{{ form_label(form.laboratoire, "Laboratoire : ") }}
+		{{ form_widget(form.laboratoire, {"attr": {"class": "form-control"}}) }}
+		{{ form_errors(form.laboratoire) }}
+	</div>
+
+	<div class="form-group">
+		{{ form_label(form.picture, "Photo : ") }}
+		{{ form_widget(form.picture, {"attr": {"class": "btn btn-primary", "id": "input-file"}}) }}
+		{{ form_errors(form.picture) }}
+	</div>
+
+	<div class="form-group">
+		{{ form_widget(form.enregistrer, {"attr": {"class": "btn btn-default"}}) }}
+	</div>
+
+{{ form_end(form) }}
+
+{% endblock %}

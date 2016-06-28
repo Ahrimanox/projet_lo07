@@ -1,1 +1,11 @@
-Hello World!
+{% extends "PublicationBundle:Default:base.html.twig" %}
+
+{% block title %}Accueil{% endblock %}
+{% block header %}
+{% endblock %}
+
+{% block body %}
+
+{% include "PublicationBundle:Article:article.html.twig" %}
+
+{% endblock %}

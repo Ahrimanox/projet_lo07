@@ -1,0 +1,100 @@
+{% extends "PublicationBundle:Default:base.html.twig" %}
+
+{% block title %}Recherche{% endblock %}
+{% block header %}
+{% endblock %}
+
+{% block body %}
+<div class="container col-sm-7">
+	<form role="form" method="post">
+		<div class="form-group">
+			<label for="chercheur">Chercheur :</label>
+			<select id="chercheur" class="form-control" name="chercheur">
+			{% for chercheur in listeChercheur %}
+				<option value="{{ chercheur.id }}">{{ chercheur.prenom }} {{ chercheur.nom }}</option>
+			{% endfor %}
+			</select>	
+		</div>
+
+		<button id="computeButton" type="button" class="btn btn-primary" onclick=computeStats()>Calculer</button>
+	</form>
+</div>
+<div class="container col-sm-5">
+	<canvas id="bar-chart" width="50" height="50"></canvas>
+	<script>
+	var ctx = $("#bar-chart");
+
+	var computeStats = function()
+	{
+		var value = $("#chercheur").val();
+		//ctx.clearRect(0, 0, canvas.width, canvas.height);
+	    $.post("{{ path("publication_statistiques_get") }}",
+		    {
+		    	chercheur: value
+		    },
+		    function(data, status)
+		    {
+		    	var bardata = JSON.parse(data, function (key, value) {
+				    var type;
+				    if (value && typeof value === 'object') {
+				        type = value.type;
+				        if (typeof type === 'string' && typeof window[type] === 'function') {
+				            return new (window[type])(value);
+				        }
+				    }
+				    return value;
+				});
+
+		        var idCher = bardata.chercheur;
+		        var min = bardata.min;
+		        var max = bardata.max;
+		        var nombreAnnee = max - min + 1;
+
+		        var nombresArticles = bardata.numberOfArticle;
+		        var annees = new Array();
+		        for (var i = min; i <= max; ++i)
+		        {
+		        	annees.push(i);
+		        }
+		        var nombres = new Array();
+
+		        for (var i = 0; i < nombreAnnee; ++i)
+		        {
+		        	//console.log("" + annees[i]);
+		        	nombres.push(nombresArticles[ "" + annees[i] ]);
+		        }
+
+		        barData = {
+				    labels: annees,
+				    datasets: {
+				    	label: "Nombre d'article par année",
+				    	data: nombres
+				    }	
+				};
+				
+				var barchart = new Chart(ctx, {
+					type: 'bar',
+					data: {
+						labels:	annees,
+						datasets: [{
+							label: "Nombre d'articles",
+				            data: nombres
+				        }]
+				    },
+				    options: {
+						scales: {
+							yAxes: [{
+								ticks: {
+									beginAtZero:true
+								}
+							}]
+						}
+					}
+				});
+				    
+	    	});
+	}
+	</script>
+</div>
+
+{% endblock %}

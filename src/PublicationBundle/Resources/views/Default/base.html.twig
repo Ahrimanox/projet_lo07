@@ -2,16 +2,69 @@
 <html>
 	<head> 
 		<meta charset="utf-8" />
-		<title>{% block title %}Plateforme de publications{% endblock %}</title>
+		<title>{% block title %}{% endblock %} - Plateforme de publications</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 
 		<link rel="stylesheet" href="{{ asset("css/bootstrap.min.css") }}" />
-
+		<link rel="stylesheet" href="{{ asset("css/base.css") }}" />
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.6/Chart.min.js"></script>
+		<script type="text/javascript" src="{{ asset("js/bootstrap.file-input.js") }}"></script>
 	</head>
 	<body>
-		<div class="jumbotron">
-			<div class="container">
-				<h1>Site de publication scientifique</h1>
+		<header class="page-header container-fluid">
+			<img id="logo" src="{{ asset('img/logo-utt.jpg') }}" class="img-rounded" height="" alt="logo_utt.png" />
+			<h1>Plateforme de publications scientifiques {% block header %}{% endblock %}</h1>
+		</header>
+
+		<div class="body">
+			<nav class="navbar navbar-default">
+			  	<div class="container-fluid">
+			    <div class="navbar-header">
+			    	<a class="navbar-brand" href="{{ path("publication_homepage") }}">Acceuil</a>
+			    </div>
+				    <form class="navbar-form navbar-right" action="{{ path('publication_user_login') }}">
+				    	<div class="form-group">
+			    			<input class="form-control" type="text" id="login" name="login" placeholder="Login" />
+			    		</div>
+			    		<div class="form-group">
+			    			<input class="form-control" type="password" id="password" name="password" placeholder="Mot de passe" />
+			    		</div>
+			    		<ul class="nav navbar-nav navbar-right">
+					    	<li><button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-log-in"></span> Connexion</button></li>
+				    	</ul>
+			    	</form>
+			    	<form class="navbar-form navbar-right" action="{{ path('publication_user_add') }}">
+			    		<ul class="nav navbar-nav navbar-right">
+			    			<li><button type="submit" class="btn btn-default" href="{{ path('publication_user_add') }}"><span class="glyphicon glyphicon-user"></span> Inscription</button></li>
+			    		</ul>
+			    	</form>
+			  </div>
+			</nav>
+
+			<div class="container-fluid col-sm-3">
+				<div class="btn-group-vertical col-sm-12 group_button">
+					<a href="{{ path("publication_recherche") }}" class="btn btn-default"><span class="glyphicon glyphicon-search"></span> Recherche</a>
+					<a href="{{ path("publication_chercheur_view") }}" class="btn btn-default"><span class="glyphicon glyphicon-user"></span> Voir les chercheurs</a>
+				</div>
+				<div class="btn-group-vertical col-sm-12 group_button">
+					<a href="{{ path("publication_article_add") }}" class="btn btn-success"><span class="glyphicon glyphicon-plus"></span> Ajouter un article</a>
+					<a href="{{ path("publication_article_view") }}" class="btn btn-success"><span class="glyphicon glyphicon-book"></span> Voir ses articles</a>
+					<a href="{{ path("publication_statistiques") }}" class="btn btn-success"><span class="glyphicon glyphicon-stats"></span> Statistiques</a>
+				</div>
+				<div class="btn-group-vertical col-sm-12 group_button">
+					<a href="{{ path("publication_chercheur_add") }}" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> Ajouter un chercheur</a>
+					<a href="{{ path("publication_laboratoire_add") }}" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> Ajouter un laboratoire</a>
+					<a href="{{ path("publication_organisation_add") }}" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> Ajouter une organisation</a>
+					<a href="{{ path("publication_categorie_add") }}" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> Ajouter une categorie</a>
+				</div>
+			</div>
+
+			<div class="container-fluid col-sm-9">
+			{% block alerts %}
+			{% endblock %}
+			{% block body %}
+			{% endblock %}
 			</div>
 		</div>
 	</body>

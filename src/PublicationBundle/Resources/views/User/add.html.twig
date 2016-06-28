@@ -1,0 +1,100 @@
+{% extends "PublicationBundle:Default:base.html.twig" %}
+
+{% block title %}Ajout d'un chercheur{% endblock %}
+{% block header %}
+<script type="text/javascript">
+
+var textBase = "-- Choisisser d'abord une organisation --";
+$(document).ready(function() {
+	$('#organisation option[value=""]').prop('selected', true);
+	$('#laboratoire option[value=""]').prop('selected', true);
+	var value = $('#organisation').val();
+	$('#laboratoire option').each(function() {
+		if ($(this).val() == value)
+		{
+			$(this).show();
+		}
+		else
+		{
+			$(this).hide();
+		}
+	});
+});
+var change = function(value)
+{
+	var c = 0;
+	var i = 0;
+	$('#organisation option[value=""]').remove();
+	var valueLab = -1;
+	$('#laboratoire option').each(function() {
+		++i;
+		if ($(this).attr('id') == value)
+		{
+			++c;
+			$(this).show();
+		}
+		else
+		{
+			$(this).hide();
+		}
+	});
+
+
+
+	if (c>0)
+	{
+		$('#laboratoire option:eq(' + i + ')').prop('selected', true);
+	}
+}
+</script>
+{% endblock %}
+
+{% block body %}
+<form id="form" role="form" action="{{ path("publication_user_valid") }}" class="col-sm-6" method="post" enctype="multipart/form-data">
+	<div class="form-group">
+		<label for="login">Login :</label>
+		<input required type="text" class="form-control" id="login" name="login" />
+	</div>
+
+	<div class="form-group">
+		<label for="password">Mot de Passe :</label>
+		<input required type="password" class="form-control" id="password" name="password" />
+	</div>
+
+	<div class="form-group">
+		<label for="nom">Nom :</label>
+		<input required type="text" class="form-control" id="nom" name="nom" />
+	</div>
+
+	<div class="form-group">
+		<label for="prenom">Prenom :</label>
+		<input required type="text" class="form-control" id="prenom" name="prenom" />
+	</div>
+
+	<div class="form-group">
+		<label for="organisation">Organisation :</label>
+		<select required class="form-control" id="organisation" name="organisation" onchange="change(this.value)">
+		<option value="">-- Choisissez une organisation --</option>
+		{% for organisation in listeOrganisation %}
+		<option value="{{ organisation.id }}">{{ organisation.nom }}</option>
+		{% endfor %}
+		</select>
+	</div>
+
+	<div class="form-group">
+		<label for="laboratoire">Laboratoire :</label>
+		<select required class="form-control" id="laboratoire" name="laboratoire">
+		<option value="">-- Choisisser d'abord une organisation --</option>
+		{% for laboratoire in listeLaboratoire %}
+		<option id="{{ laboratoire.organisation.id }}" value="{{ laboratoire.id }}">{{ laboratoire.nom }}</option>
+		{% endfor %}
+		</select>
+	</div>
+
+	<input required id="picture" type="file" name="picture" />
+
+	<button type="submit" class="btn btn-default">Enregistrer</button>
+
+</form>
+
+{% endblock %}
